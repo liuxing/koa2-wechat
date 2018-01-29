@@ -192,7 +192,7 @@ return ctx.body = 'success'
 
 一切正常的话*(实际开发中你可能会遇到各种问题)*，命令行将打印出如下JSON数据
 
-```json
+```js
 { ToUserName: 'gh_9d2d49e7e006',
   FromUserName: 'oBp2T0wK8lM4vIkmMTJfFpk6Owlo',
   CreateTime: '1516941086',
