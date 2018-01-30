@@ -6,3 +6,4 @@ run/
 *.swp
 *.log
 config.js
+access_token.txt
