@@ -6,7 +6,7 @@
 
 - Lesson0 - [本地开发调试环境搭建](https://github.com/ogilhinn/koa2-wechat/tree/master/lesson0)
 - Lesson1 - [消息管理](https://github.com/ogilhinn/koa2-wechat/tree/master/lesson1)
-- Lesson2 - [消息管理](https://github.com/ogilhinn/koa2-wechat/tree/master/lesson3)
+- Lesson2 - [消息模块封装]](https://github.com/ogilhinn/koa2-wechat/tree/master/lesson3)
 - Lesson3 - [获取access_token打开新世界的大门](https://github.com/ogilhinn/koa2-wechat/tree/master/lesson3)
 - Lesson4 - [自定义公众号菜单](https://github.com/ogilhinn/koa2-wechat/tree/master/lesson4)
 
