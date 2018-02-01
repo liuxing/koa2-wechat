@@ -67,7 +67,7 @@ function wechat(config, handle) {
         encoding: ctx.request.charset || 'utf-8'
       })
       const formatted = await parseXML(xml)
-      
+
       // 业务逻辑处理handle
       const content = await handle(formatted, ctx)
       if (!content) {
@@ -101,7 +101,9 @@ app.use(wechat(config, async (message, ctx) => {
 app.listen(7001)
 ```
 
-到此，我们只需要在`// TODO`这儿处理我们自己的各种业务逻辑即可，`wechat.js`只用来处理与微信的交互，代码立马变得整洁干净了。
+到此，我们只需要在`// TODO`这儿处理我们自己的各种业务逻辑即可，`wechat.js`只用来处理与微信的交互，代码立马变得整洁干净了
+
+[查看代码](https://github.com/ogilhinn/koa2-wechat/tree/master/lesson2)
 
 ## 三、获取access_token
 
@@ -120,7 +122,7 @@ app.listen(7001)
 
 ```javascript
 /*
-https请求方式: GET 
+https请求方式: GET
 https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=APPID&secret=APPSECRET
 
 
@@ -143,9 +145,9 @@ expires_in	凭证有效时间，单位：秒
 
 官方文档介绍可见：[https://mp.weixin.qq.com/wiki](https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1421140183)
 
-### 3.2 获取并保存access_token  
+### 3.2 获取并保存access_token
 
-现在开始编码实现我们之前所讲的获取access_token的流程，我们使用了es6的类，如果不了解es6可以去看看阮老师的[ECMAScript 6 入门](http://es6.ruanyifeng.com/) 
+现在开始编码实现我们之前所讲的获取access_token的流程，我们使用了es6的类，如果不了解es6可以去看看阮老师的[ECMAScript 6 入门](http://es6.ruanyifeng.com/)
 
 这儿我们用到[axios](https://github.com/axios/axios) 这个网络请求的库，随着Vue社区对他的强烈推荐，看着它从几千star到了几万star。我们也赶赶时髦在这儿使用它来发送我们的所有请求。
 
@@ -165,7 +167,7 @@ class API {
     this.appsecret = appsecret
     this.prefix = 'https://api.weixin.qq.com/cgi-bin/'
   }
-  
+
   async getAccessToken() {
     const response = await axios.get(`${this.prefix}token?grant_type=client_credential&appid=${this.appid}&secret=${this.appsecret}`)
     console.log(response.data)
@@ -198,12 +200,12 @@ class API {
       await fs.writeFile('access_token.txt', JSON.stringify(token))
     }
   }
-  
+
   // 从https接口获取access_token
   async getAccessToken() {
     let token = {}
     const response = await axios.get(`${this.prefix}token?grant_type=client_credential&appid=${this.appid}&secret=${this.appsecret}`)
-    
+
     // 过期时间，因网络延迟等，将实际过期时间提前20秒，以防止临界点
     const expireTime = Date.now() + (data.data.expires_in - 20) * 1000
     token.accessToken = response.data.access_token
@@ -235,7 +237,7 @@ class API {
       return JSON.parse(txt)
     }
   }
-  
+
   // 从https接口获取access_token
   async getAccessToken() {
     ...
@@ -261,12 +263,12 @@ class API {
       return JSON.parse(txt)
     }
   }
-  
+
   // 从https接口获取access_token
   async getAccessToken() {
     ...
   }
-  
+
   // 读取文件获取token，读取失败重新请求接口
   async ensureAccessToken() {
     let token = {}
@@ -280,7 +282,7 @@ class API {
     }
     return this.getAccessToken()
   }
-    
+
   // 验证access_token是否过期
   isValid(accessToken, expireTime) {
     return !!accessToken && Date.now() < expireTime
@@ -299,7 +301,7 @@ class API {
 ```javascript
 class API {
   ...
-  
+
   // 创建菜单
   async createMenu(menu) {
     const { accessToken } = await this.ensureAccessToken()
